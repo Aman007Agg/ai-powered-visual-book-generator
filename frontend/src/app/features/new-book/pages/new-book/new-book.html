@@ -1,1 +1,49 @@
-<p>new-book works!</p>
+<div class="page-container">
+
+  <mat-card>
+
+    <div class="page-title">
+
+        <mat-icon>auto_stories</mat-icon>
+
+        <h1>Create New Book</h1>
+
+    </div>
+
+    <p>
+      Provide optional context to help AI generate better layouts.
+    </p>
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Book Title</mat-label>
+
+      <input
+        matInput
+        [(ngModel)]="title">
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Book Objective</mat-label>
+
+      <textarea
+        matInput
+        rows="5"
+        [(ngModel)]="objective">
+      </textarea>
+
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary">
+
+      Continue
+
+    </button>
+
+  </mat-card>
+
+</div>
