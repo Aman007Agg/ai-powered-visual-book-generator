@@ -1,1 +1,84 @@
-<p>page-input works!</p>
+<div class="page-container">
+
+  <mat-card>
+
+    <div class="page-title">
+      <mat-icon>description</mat-icon>
+      <h1>Page Content</h1>
+    </div>
+
+    <p class="page-description">
+      Enter the content for this page.
+    </p>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Page Content</mat-label>
+
+      <textarea
+        matInput
+        rows="12"
+        [(ngModel)]="pageContent">
+      </textarea>
+
+    </mat-form-field>
+
+    <!-- Upload Images Section -->
+    <div class="upload-section">
+
+      <h3>Upload Images</h3>
+
+      <p class="section-description">
+        Upload one or more images for this page.
+      </p>
+
+      <button
+        mat-raised-button
+        color="primary">
+
+        <mat-icon>upload</mat-icon>
+
+        Select Images
+
+      </button>
+
+    </div>
+
+    <!-- Image Preview Section -->
+    <div class="selected-images">
+
+      <h3>Selected Images</h3>
+
+      <div class="image-preview-container">
+
+        <div class="image-placeholder">
+          Preview
+        </div>
+
+        <div class="image-placeholder">
+          Preview
+        </div>
+
+        <div class="image-placeholder">
+          Preview
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Action Button -->
+    <div class="action-buttons">
+
+      <button
+        mat-raised-button
+        color="primary">
+
+        Generate Layout
+
+      </button>
+
+    </div>
+
+  </mat-card>
+
+</div>
