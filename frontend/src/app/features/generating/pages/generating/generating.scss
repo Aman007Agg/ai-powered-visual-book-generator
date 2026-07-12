@@ -1,0 +1,99 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    padding: 16px;
+}
+
+mat-card {
+    width: 100%;
+    max-width: 750px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-title mat-icon {
+    font-size: 34px;
+    width: 34px;
+    height: 34px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.page-description {
+    margin: 0;
+    color: #616161;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.completed mat-icon {
+    color: #4caf50;
+}
+
+.active mat-icon {
+    color: #1976d2;
+    animation: spin 1.5s linear infinite;
+}
+
+.pending mat-icon {
+    color: #bdbdbd;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.footer strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.footer p {
+    margin: 0;
+    font-weight: 500;
+    color: #757575;
+    font-size: 14px;
+}
+
+.footer small {
+    color: #757575;
+}
+
+mat-progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    margin: 10px 0 20px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

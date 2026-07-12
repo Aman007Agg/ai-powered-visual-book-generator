@@ -23,6 +23,13 @@ export const routes: Routes = [
   },
 
   {
+    path: 'generating',
+    loadComponent: () =>
+      import('./features/generating/pages/generating/generating')
+        .then(m => m.Generating)
+  },
+
+  {
     path: 'layout-preview',
     loadComponent: () =>
       import('./features/layout-preview/pages/layout-preview/layout-preview')
