@@ -1,1 +1,97 @@
-<p>layout-preview works!</p>
+<div class="page-container">
+
+  <mat-card>
+
+    <div class="page-title">
+
+      <mat-icon>view_quilt</mat-icon>
+
+      <h1>Choose Your Preferred Layout</h1>
+
+    </div>
+
+    <p class="page-description">
+      AI has generated two layout options for this page.
+    </p>
+
+    <div class="layout-grid">
+
+      <!-- Layout A -->
+
+      <div class="layout-card" [class.selected]="selectedLayout === 'A'">
+
+        <h2>Layout A</h2>
+
+        
+        <div class="layout-preview">
+            <div class="page-placeholder">
+                <div class="placeholder-image"></div>
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line short"></div>
+
+            </div>
+
+        </div>
+
+        <mat-radio-group [(ngModel)]="selectedLayout">
+
+          <mat-radio-button value="A">
+
+            Select Layout
+
+          </mat-radio-button>
+
+        </mat-radio-group>
+
+      </div>
+
+      <!-- Layout B -->
+
+      <div class="layout-card" [class.selected]="selectedLayout === 'B'">
+
+        <h2>Layout B</h2>
+
+        <div class="layout-preview">
+
+            <div class="page-placeholder">
+
+                <div class="placeholder-image"></div>
+
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line short"></div>
+
+            </div>
+
+        </div>
+
+        <mat-radio-group [(ngModel)]="selectedLayout">
+
+          <mat-radio-button value="B">
+
+            Select Layout
+
+          </mat-radio-button>
+
+        </mat-radio-group>
+
+      </div>
+
+    </div>
+
+    <div class="action-buttons">
+
+      <button
+        mat-raised-button
+        color="primary">
+
+        Continue With Selected Layout
+
+      </button>
+
+    </div>
+
+  </mat-card>
+
+</div>
