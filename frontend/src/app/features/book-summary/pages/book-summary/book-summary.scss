@@ -1,0 +1,89 @@
+.page-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 60px;
+
+    padding: 16px;
+
+}
+
+mat-card {
+
+    width: 700px;
+
+    padding: 32px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+}
+
+.page-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.page-title mat-icon {
+
+    font-size: 34px;
+
+    width: 34px;
+
+    height: 34px;
+
+}
+
+.page-description {
+
+    color: #616161;
+
+}
+
+.summary-grid {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #eeeeee;
+
+}
+
+.success {
+
+    color: #2e7d32;
+
+}
+
+.action-buttons {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 16px;
+
+}

@@ -1,1 +1,80 @@
-<p>book-summary works!</p>
+<div class="page-container">
+
+  <mat-card>
+
+    <div class="page-title">
+
+      <mat-icon color="primary">check_circle</mat-icon>
+
+      <h1>Book Draft Ready</h1>
+
+    </div>
+
+    <p class="page-description">
+
+      Your AI-generated visual book has been prepared successfully.
+
+    </p>
+
+    <div class="summary-grid">
+
+      <div class="summary-row">
+
+        <span>Book Title</span>
+
+        <strong>{{ bookTitle }}</strong>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>Pages Generated</span>
+
+        <strong>{{ totalPages }}</strong>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>Layouts Selected</span>
+
+        <strong>{{ layoutsSelected }}</strong>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>Status</span>
+
+        <strong class="success">
+
+          Draft Ready
+
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="action-buttons">
+
+      <button
+        mat-raised-button>
+
+        Download Draft
+
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary">
+
+        Start New Book
+
+      </button>
+
+    </div>
+
+  </mat-card>
+
+</div>
