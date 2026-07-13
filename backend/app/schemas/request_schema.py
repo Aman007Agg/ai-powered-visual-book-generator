@@ -1,6 +1,28 @@
 from pydantic import BaseModel, Field
 
 
+class PageImage(BaseModel):
+    """
+    Represents a single uploaded image sent from the Angular application.
+    """
+
+    fileName: str = Field(
+        ...,
+        description="Original uploaded file name"
+    )
+
+    mimeType: str = Field(
+        ...,
+        description="Image MIME type (image/png, image/jpeg, etc.)"
+    )
+
+    base64: str = Field(
+        ...,
+        min_length=1,
+        description="Base64 encoded image content"
+    )
+
+
 class GenerateLayoutRequest(BaseModel):
     """
     Request payload received from the Angular application
@@ -23,7 +45,7 @@ class GenerateLayoutRequest(BaseModel):
         description="Text content of the current page"
     )
 
-    images: list[str] = Field(
+    images: list[PageImage] = Field(
         default_factory=list,
-        description="List of uploaded image references"
+        description="List of uploaded page images"
     )
