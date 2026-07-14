@@ -1,21 +1,20 @@
+import { LayoutSection } from './layout-section.model';
+
 export interface LayoutOption {
+
   /**
-   * Unique identifier for the layout.
+   * Layout identifier.
    */
   id: string;
 
   /**
-   * AI generated layout name.
+   * Layout name.
    */
-  layout_name: string;
+  name: string;
 
   /**
-   * Short explanation of why this layout was chosen.
+   * All sections belonging to this layout.
    */
-  description: string;
+  sections: LayoutSection[];
 
-  /**
-   * AI confidence score.
-   */
-  confidence: number;
 }

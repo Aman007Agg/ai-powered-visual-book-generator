@@ -16,67 +16,69 @@
 
     <div class="layout-grid">
 
-      <!-- Layout A -->
+      @for (layout of layoutOptions; track layout.id) {
 
-      <div class="layout-card" [class.selected]="selectedLayout === 'A'">
+        <div
+          class="layout-card"
+          [class.selected]="selectedLayoutId === layout.id">
 
-        <h2>Layout A</h2>
+          <h2>{{ layout.name }}</h2>
 
-        
-        <div class="layout-preview">
-            <div class="page-placeholder">
-                <div class="placeholder-image"></div>
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line short"></div>
+          <div class="layout-preview">
 
-            </div>
+            <div class="page-preview">
 
-        </div>
+              @for (section of layout.sections; track section.id) {
 
-        <mat-radio-group [(ngModel)]="selectedLayout">
+                @switch (section.type) {
 
-          <mat-radio-button value="A">
+                  @case ('title') {
 
-            Select Layout
+                    <h3>
+                      {{ section.content }}
+                    </h3>
 
-          </mat-radio-button>
+                  }
 
-        </mat-radio-group>
+                  @case ('text') {
 
-      </div>
+                    <p>
+                      {{ section.content }}
+                    </p>
 
-      <!-- Layout B -->
+                  }
 
-      <div class="layout-card" [class.selected]="selectedLayout === 'B'">
+                  @case ('image') {
 
-        <h2>Layout B</h2>
+                    <img
+                      [src]="section.content"
+                      alt="Generated image">
 
-        <div class="layout-preview">
+                  }
 
-            <div class="page-placeholder">
+                }
 
-                <div class="placeholder-image"></div>
-
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line short"></div>
+              }
 
             </div>
 
+          </div>
+
+          <mat-radio-group
+            [(ngModel)]="selectedLayoutId">
+
+            <mat-radio-button
+              [value]="layout.id">
+
+              Select Layout
+
+            </mat-radio-button>
+
+          </mat-radio-group>
+
         </div>
 
-        <mat-radio-group [(ngModel)]="selectedLayout">
-
-          <mat-radio-button value="B">
-
-            Select Layout
-
-          </mat-radio-button>
-
-        </mat-radio-group>
-
-      </div>
+      }
 
     </div>
 
@@ -84,7 +86,8 @@
 
       <button
         mat-raised-button
-        color="primary">
+        color="primary"
+        (click)="continueWithSelectedLayout()">
 
         Continue With Selected Layout
 

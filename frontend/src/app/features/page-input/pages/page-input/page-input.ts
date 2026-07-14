@@ -12,9 +12,11 @@ import { PageImage } from '../../../../shared/models/page-image.model';
 import { Router } from '@angular/router';
 
 import { ApiService } from '../../../../core/services/http/api-service';
+import { LayoutStateService } from '../../../../core/services/state/layout-state.service';
 
 import { GenerateLayoutRequest } from '../../../../shared/models/generate-layout-request.model';
 import { GenerateLayoutResponse } from '../../../../shared/models/generate-layout-response.model';
+
 @Component({
   selector: 'app-page-input',
   standalone: true,
@@ -46,6 +48,7 @@ export class PageInput {
 
   constructor(
     private readonly apiService: ApiService,
+    private readonly layoutStateService: LayoutStateService,
     private readonly router: Router
   ) {}
 
@@ -138,6 +141,8 @@ export class PageInput {
         next: (response: GenerateLayoutResponse) => {
 
           console.log('AI Response', response);
+
+          this.layoutStateService.setLayoutResponse(response);
 
           this.router.navigate([
             '/generating'
