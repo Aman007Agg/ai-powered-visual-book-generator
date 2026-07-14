@@ -2,19 +2,16 @@ import { LayoutSection } from './layout-section.model';
 
 export interface LayoutOption {
 
-  /**
-   * Layout identifier.
-   */
   id: string;
 
-  /**
-   * Layout name.
-   */
-  name: string;
+  layout_type: string;
 
-  /**
-   * All sections belonging to this layout.
-   */
+  layout_name: string;
+
+  description: string;
+
+  confidence: number;
+
   sections: LayoutSection[];
 
 }

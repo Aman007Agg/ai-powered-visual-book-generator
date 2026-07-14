@@ -44,7 +44,7 @@ export class LayoutPreview implements OnInit {
     }
     
     this.layoutResponse = response;
-    this.layoutOptions = response.layouts;
+    this.layoutOptions = response.layout_options;
 
     if (this.layoutOptions.length > 0) {  
       this.selectedLayoutId = this.layoutOptions[0].id;
@@ -74,6 +74,16 @@ export class LayoutPreview implements OnInit {
     this.router.navigate([
       '/book-summary'
     ]);
+
+  }
+
+  getImage(imageReference?: number): string {
+
+    if (imageReference == null) {
+      return '';
+    }
+
+    return this.layoutStateService.getPageImages()[imageReference]?.base64 ?? '';
 
   }
 

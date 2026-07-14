@@ -134,6 +134,8 @@ export class PageInput {
 
     };
 
+    this.layoutStateService.setPageImages(this.selectedImages);   
+
     this.apiService
       .generateLayouts(request)
       .subscribe({

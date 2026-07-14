@@ -22,37 +22,51 @@
           class="layout-card"
           [class.selected]="selectedLayoutId === layout.id">
 
-          <h2>{{ layout.name }}</h2>
+          <h2>{{ layout.layout_name }}</h2>
+
+          <p class="layout-description">
+            {{ layout.description }}
+          </p>
+
+          <p class="layout-confidence">
+            <strong>Confidence:</strong>
+            {{ layout.confidence }}%
+          </p>
 
           <div class="layout-preview">
 
             <div class="page-preview">
 
-              @for (section of layout.sections; track section.id) {
+              @for (section of layout.sections; track $index) {
 
                 @switch (section.type) {
 
+                  @case ('image') {
+
+                    @if (getImage(section.image_reference); as imageSrc) {
+
+                      <img
+                        class="preview-image"
+                        [src]="imageSrc"
+                        alt="Uploaded image">
+
+                    }
+
+                  }
+
                   @case ('title') {
 
-                    <h3>
-                      {{ section.content }}
+                    <h3 class="preview-title">
+                      {{ section.text }}
                     </h3>
 
                   }
 
-                  @case ('text') {
+                  @case ('paragraph') {
 
-                    <p>
-                      {{ section.content }}
+                    <p class="preview-paragraph">
+                      {{ section.text }}
                     </p>
-
-                  }
-
-                  @case ('image') {
-
-                    <img
-                      [src]="section.content"
-                      alt="Generated image">
 
                   }
 

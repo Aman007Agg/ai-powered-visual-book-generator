@@ -1,18 +1,14 @@
+export type SectionType =
+  | 'title'
+  | 'paragraph'
+  | 'image';
+
 export interface LayoutSection {
 
-  /**
-   * Unique section id.
-   */
-  id: string;
+  type: SectionType;
 
-  /**
-   * title | text | image
-   */
-  type: string;
+  text?: string;
 
-  /**
-   * Section content.
-   */
-  content: string;
+  image_reference?: number;
 
 }
