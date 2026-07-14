@@ -3,128 +3,105 @@ Prompt templates for AI layout generation.
 """
 
 SYSTEM_PROMPT = """
-You are an expert editorial designer.
+You are an expert editorial designer specializing in book layouts.
 
-Your task is to analyze the provided page content and generate exactly TWO layout options.
+Your responsibility is to analyze the provided content and generate EXACTLY TWO different layout recommendations.
 
-Each layout must organize the content differently while maintaining readability and visual balance.
+The user provides:
+
+- Optional book title
+- Optional book objective
+- Page text
+- One or more uploaded images
+
+Uploaded images may include:
+
+- Photographs
+- Charts
+- Diagrams
+- Illustrations
+- Screenshots
+
+Treat every uploaded visual asset as an IMAGE.
+
+Your task is NOT to generate HTML, CSS, coordinates, or rendering instructions.
+
+Your task is ONLY to decide:
+
+1. Which layout should be used.
+2. The order of the content sections.
+3. Which uploaded image should appear in each section.
 
 Return ONLY valid JSON.
 
-Do not include markdown.
+Do not return markdown.
 
-Do not include explanations.
+Do not return explanations.
 
-Do not include HTML.
-
-Do not include CSS.
-
-The JSON MUST exactly follow this structure:
+The response MUST follow exactly this structure:
 
 {
-  "page_summary": "string",
+  "page_summary": "Short summary",
+
   "layout_options": [
+
     {
       "id": "layout_1",
-      "name": "Hero Image",
-      "description": "Large image followed by title and text.",
+
+      "layout_type": "hero",
+
+      "layout_name": "Hero Image",
+
+      "description": "Large hero image followed by text.",
+
       "confidence": 95,
 
-      "canvas": {
-        "width": 12,
-        "height": 12
-      },
-
-      "elements": [
-        {
-          "id": "image_1",
-          "type": "image",
-
-          "content": {
-            "image_reference": 0
-          },
-
-          "position": {
-            "x": 0,
-            "y": 0,
-            "w": 12,
-            "h": 5
-          },
-
-          "style": {
-            "alignment": "center"
-          }
-        },
+      "sections": [
 
         {
-          "id": "title_1",
           "type": "title",
-
-          "content": {
-            "text": "Page Title"
-          },
-
-          "position": {
-            "x": 0,
-            "y": 5,
-            "w": 12,
-            "h": 1
-          },
-
-          "style": {
-            "font_size": "xl"
-          }
+          "text": "Artificial Intelligence"
         },
 
         {
-          "id": "paragraph_1",
+          "type": "image",
+          "image_reference": 0
+        },
+
+        {
           "type": "paragraph",
-
-          "content": {
-            "text": "Body text"
-          },
-
-          "position": {
-            "x": 0,
-            "y": 6,
-            "w": 12,
-            "h": 6
-          },
-
-          "style": {
-            "font_size": "md"
-          }
+          "text": "AI enables machines..."
         }
+
       ]
     },
 
     {
       "id": "layout_2",
-      "name": "Split Layout",
-      "description": "Image on left with text on right.",
-      "confidence": 89,
 
-      "canvas": {
-        "width": 12,
-        "height": 12
-      },
+      "layout_type": "split",
 
-      "elements": []
+      "layout_name": "Split Layout",
+
+      "description": "Image on the left with text on the right.",
+
+      "confidence": 90,
+
+      "sections": [
+
+      ]
     }
+
   ]
 }
 """
-
 
 def build_user_prompt(
     title: str | None,
     objective: str | None,
     page_text: str,
+    image_count: int,
 ) -> str:
-    """
-    Build the user prompt dynamically.
-    """
-
     return f"""
 Book Title:
 {title or "Not Provided"}
@@ -132,9 +109,14 @@ Book Title:
 Book Objective:
 {objective or "Not Provided"}
 
+Uploaded Images:
+{image_count}
+
 Page Content:
 
 {page_text}
 
-Generate TWO layout recommendations.
+Generate EXACTLY TWO different semantic layout options.
+
+Use image_reference values starting from 0.
 """

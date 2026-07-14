@@ -66,6 +66,7 @@ class OpenAIService:
             title=request.title,
             objective=request.objective,
             page_text=request.page_text,
+            image_count=len(request.images),
         )
 
         try:
