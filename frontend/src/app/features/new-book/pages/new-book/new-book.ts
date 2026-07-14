@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-book',
@@ -26,5 +27,15 @@ export class NewBook {
   title = '';
 
   objective = '';
+
+  constructor(
+    private readonly router: Router
+  ) {}
+
+  continue(): void {
+
+    this.router.navigate(['/page-input']);
+
+  }
 
 }

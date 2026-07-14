@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://your-api-url'
+
+  apiBaseUrl:
+    'https://your-production-api-url'
 };

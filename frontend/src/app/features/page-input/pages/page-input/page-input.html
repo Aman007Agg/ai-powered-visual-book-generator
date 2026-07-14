@@ -2,16 +2,22 @@
 
   <mat-card>
 
+    <!-- Page Header -->
     <div class="page-title">
+
       <mat-icon>description</mat-icon>
+
       <h1>Page Content</h1>
+
     </div>
 
     <p class="page-description">
       Enter the content for this page.
     </p>
 
+    <!-- Page Content -->
     <mat-form-field appearance="outline">
+
       <mat-label>Page Content</mat-label>
 
       <textarea
@@ -22,7 +28,7 @@
 
     </mat-form-field>
 
-    <!-- Upload Images Section -->
+    <!-- Upload Images -->
     <div class="upload-section">
 
       <h3>Upload Images</h3>
@@ -33,7 +39,9 @@
 
       <button
         mat-raised-button
-        color="primary">
+        color="primary"
+        type="button"
+        (click)="openFileSelector()">
 
         <mat-icon>upload</mat-icon>
 
@@ -41,37 +49,56 @@
 
       </button>
 
+      <!-- Hidden File Input -->
+      <input
+        #imageInput
+        type="file"
+        accept="image/*"
+        multiple
+        hidden
+        (change)="onFilesSelected($event)">
+
     </div>
 
-    <!-- Image Preview Section -->
+    <!-- Selected Images -->
     <div class="selected-images">
 
       <h3>Selected Images</h3>
 
       <div class="image-preview-container">
 
-        <div class="image-placeholder">
-          Preview
-        </div>
+        @if (imagePreviews.length === 0) {
 
-        <div class="image-placeholder">
-          Preview
-        </div>
+          <div class="image-placeholder">
 
-        <div class="image-placeholder">
-          Preview
-        </div>
+            No images selected
+
+          </div>
+
+        }
+
+        @for (image of imagePreviews; track image) {
+
+          <img
+            class="image-preview"
+            [src]="image"
+            alt="Uploaded Image">
+
+        }
 
       </div>
 
     </div>
 
-    <!-- Action Button -->
+    <!-- Generate Button -->
     <div class="action-buttons">
 
       <button
         mat-raised-button
-        color="primary">
+        color="primary"
+        type="button"
+        [disabled]="isGenerating"
+        (click)="generateLayouts()">
 
         Generate Layout
 

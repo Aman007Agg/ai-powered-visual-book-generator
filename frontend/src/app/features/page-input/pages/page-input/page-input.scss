@@ -59,26 +59,53 @@ mat-form-field {
 
 .image-preview-container {
     display: flex;
-    gap: 16px;
     flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
 }
 
-.image-placeholder {
+/* Shared dimensions for placeholders and uploaded images */
+.image-placeholder,
+.image-preview {
     width: 140px;
     height: 100px;
-    border: 2px dashed #c5c5c5;
     border-radius: 8px;
-    background: #fafafa;
+}
 
+/* Placeholder shown before image selection */
+.image-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
 
+    border: 2px dashed #c5c5c5;
+    background-color: #fafafa;
+
     color: #757575;
     font-size: 14px;
+    text-align: center;
+}
+
+/* Uploaded image preview */
+.image-preview {
+    object-fit: cover;
+    border: 1px solid #d6d6d6;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.image-preview:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
 .action-buttons {
     display: flex;
     justify-content: flex-end;
+    margin-top: 12px;
+}
+
+button[mat-raised-button] {
+    min-width: 170px;
 }
