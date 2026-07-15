@@ -47,3 +47,23 @@ the "client-side preferred" deliverable note (§10).
 
 Pages are processed individually to stay within LLM context limits (PRD §8,
 ~500 pages). Batching/summarization is a documented Future enhancement.
+
+## A6 — Deferred production-hardening (identified, intentionally not built)
+
+The Phase 8 QA review (`PHASE_8_TESTING_AND_REVIEW.md`) surfaced several
+hardening items. **None are PRD requirements**, and per PRD §8
+("functionality first, quality later") they are intentionally deferred for the
+MVP and recorded here as known limitations / future work:
+
+- **`image_reference` bounds guard** — if the model returns an image index that
+  doesn't exist, the frontend already degrades gracefully (renders nothing); a
+  server-side clamp is deferred.
+- **`max_tokens` + request timeout** on the OpenAI call — cost/latency hygiene;
+  deferred. Mitigation today: frontend retries once.
+- **Graceful startup + structured logging** — a missing `OPENAI_API_KEY`
+  currently fails at startup; clean-fail messaging and request logging are
+  deferred ops concerns.
+- **Image upload size/count cap** — unbounded today; low impact because images
+  are not yet sent to the model (see A1). Deferred.
+
+These are the natural first steps of a "productionisation" phase after the MVP.
