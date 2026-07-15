@@ -4,71 +4,84 @@
 
     <div class="page-title">
 
-      <mat-icon color="primary">check_circle</mat-icon>
+      <mat-icon color="primary">menu_book</mat-icon>
 
-      <h1>Book Draft Ready</h1>
+      <h1>{{ title() || 'Your Book' }}</h1>
 
     </div>
 
     <p class="page-description">
-
-      Your AI-generated visual book has been prepared successfully.
-
+      Complete book draft — {{ pageCount() }} page(s). Review each page below.
     </p>
 
-    <div class="summary-grid">
+    @if (currentPage(); as page) {
 
-      <div class="summary-row">
+      <div class="draft-page">
 
-        <span>Book Title</span>
+        <div class="draft-page__bar">
 
-        <strong>{{ bookTitle }}</strong>
+          <span>Page {{ page.pageNumber }} of {{ pageCount() }}</span>
 
-      </div>
+          <span class="draft-page__layout">
+            {{ page.selectedLayout.layout_name }}
+          </span>
 
-      <div class="summary-row">
+        </div>
 
-        <span>Pages Generated</span>
+        <div class="draft-page__canvas">
 
-        <strong>{{ totalPages }}</strong>
+          <app-layout-renderer
+            [layout]="page.selectedLayout"
+            [images]="page.images" />
 
-      </div>
-
-      <div class="summary-row">
-
-        <span>Layouts Selected</span>
-
-        <strong>{{ layoutsSelected }}</strong>
+        </div>
 
       </div>
 
-      <div class="summary-row">
+      <div class="draft-nav">
 
-        <span>Status</span>
+        <button
+          mat-stroked-button
+          [disabled]="currentIndex() === 0"
+          (click)="previousPage()">
 
-        <strong class="success">
+          <mat-icon>chevron_left</mat-icon>
+          Previous
 
-          Draft Ready
+        </button>
 
-        </strong>
+        <button
+          mat-stroked-button
+          [disabled]="currentIndex() === pageCount() - 1"
+          (click)="nextPage()">
+
+          Next
+          <mat-icon>chevron_right</mat-icon>
+
+        </button>
 
       </div>
 
-    </div>
+    }
 
     <div class="action-buttons">
 
       <button
-        mat-raised-button>
+        mat-stroked-button
+        color="primary"
+        (click)="addAnotherPage()">
 
-        Download Draft
+        <mat-icon>add</mat-icon>
+        Add Another Page
 
       </button>
 
       <button
         mat-raised-button
-        color="primary">
+        color="primary"
+        (click)="startNewBook()">
 
+        <mat-icon>restart_alt</mat-icon>
         Start New Book
 
       </button>

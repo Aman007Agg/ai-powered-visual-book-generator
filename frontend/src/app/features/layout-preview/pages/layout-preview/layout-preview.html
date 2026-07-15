@@ -11,7 +11,7 @@
     </div>
 
     <p class="page-description">
-      AI has generated two layout options for this page.
+      Page {{ pageNumber }} — AI has generated two layout options for this page.
     </p>
 
     <div class="layout-grid">
@@ -46,7 +46,8 @@
           </div>
 
           <mat-radio-group
-            [(ngModel)]="selectedLayoutId">
+            [(ngModel)]="selectedLayoutId"
+            [disabled]="committed()">
 
             <mat-radio-button
               [value]="layout.id">
@@ -65,14 +66,45 @@
 
     <div class="action-buttons">
 
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="continueWithSelectedLayout()">
+      @if (!committed()) {
 
-        Continue With Selected Layout
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="continueWithSelectedLayout()">
 
-      </button>
+          Continue With Selected Layout
+
+        </button>
+
+      } @else {
+
+        <span class="commit-note">
+          <mat-icon color="primary">check_circle</mat-icon>
+          Page {{ pageNumber }} added to your book.
+        </span>
+
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="addNextPage()">
+
+          <mat-icon>add</mat-icon>
+          Add Next Page
+
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="finishBook()">
+
+          <mat-icon>menu_book</mat-icon>
+          Finish Book
+
+        </button>
+
+      }
 
     </div>
 

@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
+import { BookStateService } from '../../../../core/services/state/book-state.service';
+
 @Component({
   selector: 'app-new-book',
   standalone: true,
@@ -29,10 +31,14 @@ export class NewBook {
   objective = '';
 
   constructor(
+    private readonly bookState: BookStateService,
     private readonly router: Router
   ) {}
 
   continue(): void {
+
+    // Title & objective are optional; a fresh book resets any previous state.
+    this.bookState.startNewBook(this.title, this.objective);
 
     this.router.navigate(['/page-input']);
 

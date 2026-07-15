@@ -1,89 +1,74 @@
 .page-container {
-
     display: flex;
-
     justify-content: center;
-
     margin-top: 60px;
-
     padding: 16px;
-
 }
 
 mat-card {
-
-    width: 700px;
-
+    width: 100%;
+    max-width: 900px;
     padding: 32px;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 24px;
-
 }
 
 .page-title {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
 }
 
 .page-title mat-icon {
-
     font-size: 34px;
-
     width: 34px;
-
     height: 34px;
-
 }
 
 .page-description {
-
     color: #616161;
-
 }
 
-.summary-grid {
-
+.draft-page {
     display: flex;
-
     flex-direction: column;
-
-    gap: 16px;
-
+    gap: 8px;
 }
 
-.summary-row {
-
+.draft-page__bar {
     display: flex;
-
     justify-content: space-between;
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #eeeeee;
-
+    align-items: center;
+    font-size: 14px;
+    color: #616161;
 }
 
-.success {
+.draft-page__layout {
+    font-weight: 600;
+    color: #1976d2;
+}
 
-    color: #2e7d32;
+.draft-page__canvas {
+    height: 460px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
 
+.draft-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .action-buttons {
-
     display: flex;
-
     justify-content: flex-end;
-
     gap: 16px;
-
+    flex-wrap: wrap;
 }

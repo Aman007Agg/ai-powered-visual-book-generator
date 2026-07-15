@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -7,8 +7,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 
 import { Router } from '@angular/router';
-import { LayoutStateService } from '../../../../core/services/state/layout-state.service';
-import { GenerateLayoutResponse } from '../../../../shared/models/generate-layout-response.model';
+import { BookStateService } from '../../../../core/services/state/book-state.service';
 import { LayoutOption } from '../../../../shared/models/layout-option.model';
 import { PageImage } from '../../../../shared/models/page-image.model';
 import { LayoutRenderer } from '../../../../shared/components/renderers/layout-renderer/layout-renderer';
@@ -29,36 +28,44 @@ import { LayoutRenderer } from '../../../../shared/components/renderers/layout-r
 })
 export class LayoutPreview implements OnInit {
 
-  layoutResponse?: GenerateLayoutResponse;
   layoutOptions: LayoutOption[] = [];
   selectedLayoutId = '';
 
-  /** Uploaded images passed to the renderer for image_reference resolution. */
+  /** Images for the current draft page (passed to the renderer). */
   images: PageImage[] = [];
 
+  /** 1-based number of the page being chosen. */
+  pageNumber = 1;
+
+  /** Becomes true once the layout is committed, revealing the next actions. */
+  readonly committed = signal(false);
+
   constructor(
-    private readonly layoutStateService: LayoutStateService,
+    private readonly bookState: BookStateService,
     private readonly router: Router
   ) {}
 
   ngOnInit(): void {
-    const response = this.layoutStateService.getLayoutResponse();
+    const response = this.bookState.draftResponse();
 
     if (!response) {
       this.router.navigate(['/page-input']);
       return;
     }
 
-    this.layoutResponse = response;
     this.layoutOptions = response.layout_options;
-    this.images = this.layoutStateService.getPageImages();
+    this.images = this.bookState.draftImages();
+    this.pageNumber = this.bookState.pageCount() + 1;
 
     if (this.layoutOptions.length > 0) {
       this.selectedLayoutId = this.layoutOptions[0].id;
     }
-
   }
 
+  /**
+   * Commit the chosen layout as a finished page, then let the user decide
+   * whether to add another page or finish the book (the PRD loop).
+   */
   continueWithSelectedLayout(): void {
 
     const selectedLayout = this.layoutOptions.find(
@@ -66,22 +73,20 @@ export class LayoutPreview implements OnInit {
     );
 
     if (!selectedLayout) {
-
       alert('Please select a layout.');
-
       return;
-
     }
 
-    console.log(
-      'Selected Layout:',
-      selectedLayout
-    );
+    this.bookState.commitCurrentPage(this.selectedLayoutId);
+    this.committed.set(true);
+  }
 
-    this.router.navigate([
-      '/book-summary'
-    ]);
+  addNextPage(): void {
+    this.router.navigate(['/page-input']);
+  }
 
+  finishBook(): void {
+    this.router.navigate(['/book-summary']);
   }
 
 }

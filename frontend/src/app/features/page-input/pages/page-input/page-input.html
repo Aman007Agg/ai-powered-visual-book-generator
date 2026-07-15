@@ -67,7 +67,7 @@
 
       <div class="image-preview-container">
 
-        @if (imagePreviews.length === 0) {
+        @if (imagePreviews().length === 0) {
 
           <div class="image-placeholder">
 
@@ -77,7 +77,7 @@
 
         }
 
-        @for (image of imagePreviews; track image) {
+        @for (image of imagePreviews(); track image) {
 
           <img
             class="image-preview"
@@ -97,7 +97,7 @@
         mat-raised-button
         color="primary"
         type="button"
-        [disabled]="isGenerating"
+        [disabled]="isGenerating()"
         (click)="generateLayouts()">
 
         Generate Layout
