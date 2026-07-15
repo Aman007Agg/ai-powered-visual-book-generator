@@ -1,0 +1,30 @@
+<article class="hero">
+
+  @if (heroRef() !== null) {
+    <div class="hero__banner">
+      <img
+        [src]="heroRef() | imageRef: images()"
+        [alt]="grouped().title || 'Hero image'">
+    </div>
+  }
+
+  @if (grouped().title) {
+    <h3 class="hero__title">{{ grouped().title }}</h3>
+  }
+
+  @for (paragraph of grouped().paragraphs; track $index) {
+    <p class="hero__paragraph">{{ paragraph }}</p>
+  }
+
+  @if (supportingRefs().length) {
+    <div class="hero__supporting">
+      @for (ref of supportingRefs(); track $index) {
+        <img
+          class="hero__thumb"
+          [src]="ref | imageRef: images()"
+          alt="Supporting image">
+      }
+    </div>
+  }
+
+</article>

@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.magazine {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  overflow: hidden;
+
+  &__title {
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #212121;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+  }
+
+  &__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  &__image {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  &__columns {
+    columns: 2;
+    column-gap: 20px;
+    overflow: hidden;
+  }
+
+  &__paragraph {
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #424242;
+    break-inside: avoid;
+  }
+}
+
+/* Responsive: single text column on narrow viewports. */
+@media (max-width: 640px) {
+  .magazine__columns {
+    columns: 1;
+  }
+}

@@ -1,0 +1,24 @@
+<article class="split">
+
+  <div class="split__media">
+    @for (ref of grouped().imageRefs; track $index) {
+      <img
+        class="split__image"
+        [src]="ref | imageRef: images()"
+        alt="Page image">
+    }
+  </div>
+
+  <div class="split__content">
+
+    @if (grouped().title) {
+      <h3 class="split__title">{{ grouped().title }}</h3>
+    }
+
+    @for (paragraph of grouped().paragraphs; track $index) {
+      <p class="split__paragraph">{{ paragraph }}</p>
+    }
+
+  </div>
+
+</article>

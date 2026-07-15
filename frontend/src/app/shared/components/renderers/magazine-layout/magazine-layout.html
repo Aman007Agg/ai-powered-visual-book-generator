@@ -1,0 +1,24 @@
+<article class="magazine">
+
+  @if (grouped().title) {
+    <h3 class="magazine__title">{{ grouped().title }}</h3>
+  }
+
+  @if (grouped().imageRefs.length) {
+    <div class="magazine__gallery">
+      @for (ref of grouped().imageRefs; track $index) {
+        <img
+          class="magazine__image"
+          [src]="ref | imageRef: images()"
+          alt="Page image">
+      }
+    </div>
+  }
+
+  <div class="magazine__columns">
+    @for (paragraph of grouped().paragraphs; track $index) {
+      <p class="magazine__paragraph">{{ paragraph }}</p>
+    }
+  </div>
+
+</article>

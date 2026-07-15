@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { LayoutStateService } from '../../../../core/services/state/layout-state.service';
 import { GenerateLayoutResponse } from '../../../../shared/models/generate-layout-response.model';
 import { LayoutOption } from '../../../../shared/models/layout-option.model';
+import { PageImage } from '../../../../shared/models/page-image.model';
+import { LayoutRenderer } from '../../../../shared/components/renderers/layout-renderer/layout-renderer';
 
 @Component({
   selector: 'app-layout-preview',
@@ -19,7 +21,8 @@ import { LayoutOption } from '../../../../shared/models/layout-option.model';
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    LayoutRenderer
   ],
   templateUrl: './layout-preview.html',
   styleUrl: './layout-preview.scss'
@@ -30,11 +33,14 @@ export class LayoutPreview implements OnInit {
   layoutOptions: LayoutOption[] = [];
   selectedLayoutId = '';
 
+  /** Uploaded images passed to the renderer for image_reference resolution. */
+  images: PageImage[] = [];
+
   constructor(
     private readonly layoutStateService: LayoutStateService,
     private readonly router: Router
   ) {}
-  
+
   ngOnInit(): void {
     const response = this.layoutStateService.getLayoutResponse();
 
@@ -42,11 +48,12 @@ export class LayoutPreview implements OnInit {
       this.router.navigate(['/page-input']);
       return;
     }
-    
+
     this.layoutResponse = response;
     this.layoutOptions = response.layout_options;
+    this.images = this.layoutStateService.getPageImages();
 
-    if (this.layoutOptions.length > 0) {  
+    if (this.layoutOptions.length > 0) {
       this.selectedLayoutId = this.layoutOptions[0].id;
     }
 
@@ -76,16 +83,5 @@ export class LayoutPreview implements OnInit {
     ]);
 
   }
-
-  getImage(imageReference?: number): string {
-
-    if (imageReference == null) {
-      return '';
-    }
-
-    return this.layoutStateService.getPageImages()[imageReference]?.base64 ?? '';
-
-  }
-
 
 }

@@ -37,42 +37,9 @@
 
             <div class="page-preview">
 
-              @for (section of layout.sections; track $index) {
-
-                @switch (section.type) {
-
-                  @case ('image') {
-
-                    @if (getImage(section.image_reference); as imageSrc) {
-
-                      <img
-                        class="preview-image"
-                        [src]="imageSrc"
-                        alt="Uploaded image">
-
-                    }
-
-                  }
-
-                  @case ('title') {
-
-                    <h3 class="preview-title">
-                      {{ section.text }}
-                    </h3>
-
-                  }
-
-                  @case ('paragraph') {
-
-                    <p class="preview-paragraph">
-                      {{ section.text }}
-                    </p>
-
-                  }
-
-                }
-
-              }
+              <app-layout-renderer
+                [layout]="layout"
+                [images]="images" />
 
             </div>
 

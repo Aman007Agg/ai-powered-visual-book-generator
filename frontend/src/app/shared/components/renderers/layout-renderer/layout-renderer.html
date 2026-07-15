@@ -1,0 +1,22 @@
+@switch (layoutType()) {
+
+  @case ('split') {
+    <app-split-layout
+      [layout]="layout()"
+      [images]="images()" />
+  }
+
+  @case ('magazine') {
+    <app-magazine-layout
+      [layout]="layout()"
+      [images]="images()" />
+  }
+
+  @default {
+    <!-- 'hero' and any unknown/malformed type degrade gracefully to Hero. -->
+    <app-hero-layout
+      [layout]="layout()"
+      [images]="images()" />
+  }
+
+}

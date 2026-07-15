@@ -101,15 +101,13 @@ mat-card {
 
     border-radius: 8px;
 
-    display: flex;
+    display: block;
 
-    justify-content: center;
-
-    align-items: center;
+    overflow: hidden;
 
     background: #fafafa;
 
-    color: #757575;
+    color: #212121;
 
 }
 
@@ -135,17 +133,13 @@ mat-card {
 
     width: 100%;
 
-    height: 420px;
+    height: 100%;
 
     overflow: hidden;
 
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 16px;
-
     padding: 16px;
+
+    box-sizing: border-box;
 
 }
 
